@@ -1,11 +1,36 @@
 import React from "react";
 
-const URLS = {
-  facebook:  "https://www.facebook.com/profile.php?id=61585040426028&mibextid=ZbWKwL",
-  instagram: "https://www.instagram.com/tareq23337/?hl=en",
-  linkedin:  "https://www.linkedin.com/in/tareq-islam3149/",
-  github:    "https://github.com/tarequlislam332760-collab",
+import { profileAPI } from '../services/api';
+
+const DEFAULT_URLS = {
+  facebook:  'https://www.facebook.com/profile.php?id=61585040426028&mibextid=ZbWKwL',
+  instagram: 'https://www.instagram.com/tareq23337/?hl=en',
+  linkedin:  'https://www.linkedin.com/in/tareq-islam3149/',
+  github:    'https://github.com/tarequlislam332760-collab',
 };
+
+// Global cache so we only fetch once
+let _cachedUrls = null;
+function useSocialUrls() {
+  const [urls, setUrls] = React.useState(_cachedUrls || DEFAULT_URLS);
+  React.useEffect(() => {
+    if (_cachedUrls) return;
+    profileAPI.get().then(res => {
+      const d = res.data?.data || res.data;
+      if (d) {
+        const merged = {
+          facebook:  d.facebook  || DEFAULT_URLS.facebook,
+          instagram: d.instagram || DEFAULT_URLS.instagram,
+          linkedin:  d.linkedin  || DEFAULT_URLS.linkedin,
+          github:    d.github    || DEFAULT_URLS.github,
+        };
+        _cachedUrls = merged;
+        setUrls(merged);
+      }
+    }).catch(() => {});
+  }, []);
+  return urls;
+}
 
 function FacebookIcon({ size }) {
   return (
@@ -57,7 +82,8 @@ const borderMap = {
 
 export function SocialLink({ type, url, size = 40 }) {
   const [hovered, setHovered] = React.useState(false);
-  const href = url || URLS[type];
+  const urls = useSocialUrls();
+  const href = url || urls[type];
   const Icon = ICONS[type];
   const iconSize = Math.round(size * 0.46);
 
