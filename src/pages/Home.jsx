@@ -26,12 +26,7 @@ const TESTIMONIALS = [
 ];
 
 const PROFILE_IMG = '/profile.png'; // static fallback if no DB image yet
-const STATS = profile ? [
-  { n: profile?.stat2n||'3+', l: profile?.stat2l||'Years Exp' },
-  { n: profile?.stat1n||'2+', l: profile?.stat1l||'Live Projects' },
-  { n: profile?.stat3n||'20+', l: profile?.stat3l||'Clients' },
-  { n: profile?.stat4n||'15+', l: profile?.stat4l||'Technologies' },
-] : [{ n: '3+', l: 'Years Exp' }, { n: '2+', l: 'Live Projects' }, { n: '20+', l: 'Clients' }, { n: '15+', l: 'Technologies' }];
+const DEFAULT_STATS = [{ n: '3+', l: 'Years Exp' }, { n: '2+', l: 'Live Projects' }, { n: '20+', l: 'Clients' }, { n: '15+', l: 'Technologies' }];
 
 const responsiveCSS = [
   '@media(max-width:768px){',
@@ -77,6 +72,13 @@ export default function Home({ navigate }) {
       setProfile(profileRes.data || null);
     }).finally(() => setDataLoading(false));
   }, []);
+
+  const STATS = profile ? [
+  { n: profile.stat2n||'3+', l: profile.stat2l||'Years Exp' },
+  { n: profile.stat1n||'2+', l: profile.stat1l||'Live Projects' },
+  { n: profile.stat3n||'20+', l: profile.stat3l||'Clients' },
+  { n: profile.stat4n||'15+', l: profile.stat4l||'Technologies' },
+] : DEFAULT_STATS;
 
   const go = (p) => { navigate(p); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
