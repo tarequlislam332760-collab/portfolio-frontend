@@ -26,7 +26,12 @@ const TESTIMONIALS = [
 ];
 
 const PROFILE_IMG = '/profile.png'; // static fallback if no DB image yet
-const STATS = [{ n: '3+', l: 'Years Exp' }, { n: '2+', l: 'Live Projects' }, { n: '20+', l: 'Clients' }, { n: '15+', l: 'Technologies' }];
+const STATS = [
+  { n: profile?.stat2n||'3+', l: profile?.stat2l||'Years Exp' },
+  { n: profile?.stat1n||'2+', l: profile?.stat1l||'Live Projects' },
+  { n: profile?.stat3n||'20+', l: profile?.stat3l||'Clients' },
+  { n: profile?.stat4n||'15+', l: profile?.stat4l||'Technologies' },
+];
 
 const responsiveCSS = [
   '@media(max-width:768px){',
@@ -199,10 +204,10 @@ export default function Home({ navigate }) {
                 <span style={{ background: 'linear-gradient(135deg,#00D4AA,#38BDF8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>The Code</span>
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.44)', fontSize: 'clamp(13px,1.4vw,15px)', lineHeight: '1.85', marginBottom: '14px', fontFamily: '"DM Sans",sans-serif' }}>
-                I'm a MERN Full Stack Developer and Digital Marketing Specialist based in Sylhet, Bangladesh. I build scalable web apps with React, Node.js, Express, and MongoDB.
+                {profile?.bio || "I'm a MERN Full Stack Developer and Digital Marketing Specialist based in Sylhet, Bangladesh. I build scalable web apps with React, Node.js, Express, and MongoDB."}
               </p>
               <p style={{ color: 'rgba(255,255,255,0.44)', fontSize: 'clamp(13px,1.4vw,15px)', lineHeight: '1.85', marginBottom: '28px', fontFamily: '"DM Sans",sans-serif' }}>
-                Deployed 2+ full-stack projects on Vercel — combining technical depth with strategic digital marketing to grow businesses online.
+                {profile?.bio2 || "Deployed 2+ full-stack projects on Vercel — combining technical depth with strategic digital marketing to grow businesses online."}
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '24px' }}>
                 {STATS.map((s, i) => (
