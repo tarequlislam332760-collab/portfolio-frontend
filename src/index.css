@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050A14;--surface:#07101E;--card:#0d1829;
+  --border:rgba(0,212,170,0.12);
+  --teal:#00D4AA;--sky:#38BDF8;--indigo:#818CF8;--pink:#f472b6;
+  --text:#E2E8F0;--muted:#64748B;
+  --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--teal),var(--sky));border-radius:99px}
+::selection{background:rgba(0,212,170,0.22);color:#fff}
+a{text-decoration:none;color:inherit}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinR{from{transform:rotate(360deg)}to{transform:rotate(0deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 8px #00D4AA}50%{box-shadow:0 0 22px #00D4AA,0 0 40px rgba(0,212,170,0.3)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes blobPulse{0%,100%{transform:scale(1);opacity:0.15}50%{transform:scale(1.2);opacity:0.28}}
+@keyframes blobPulse2{0%,100%{transform:scale(1);opacity:0.1}50%{transform:scale(1.15);opacity:0.2}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
