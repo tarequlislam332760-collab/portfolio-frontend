@@ -38,9 +38,10 @@ export default function AdminProfile() {
   useEffect(() => {
     profileAPI.get()
       .then(res => {
-        if (res.data) {
-          setProfile(prev => ({ ...prev, ...res.data }));
-          if (res.data.image) setPreview(res.data.image);
+        const d = res.data?.data || res.data;
+        if (d) {
+          setProfile(prev => ({ ...prev, ...d }));
+          if (d.image) setPreview(d.image);
         }
       })
       .catch(console.error)
