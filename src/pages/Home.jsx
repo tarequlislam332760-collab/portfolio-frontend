@@ -75,7 +75,7 @@ export default function Home({ navigate }) {
 
   const STATS = profile ? [
   { n: profile.stat2n||'3+', l: profile.stat2l||'Years Exp' },
-  { n: profile.stat1n||'2+', l: profile.stat1l||'Live Projects' },
+  { n: profile.stat2n||'2+', l: profile.stat2l||'Live Projects' },
   { n: profile.stat3n||'20+', l: profile.stat3l||'Clients' },
   { n: profile.stat4n||'15+', l: profile.stat4l||'Technologies' },
 ] : DEFAULT_STATS;
