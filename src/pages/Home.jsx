@@ -69,16 +69,17 @@ export default function Home({ navigate }) {
       setSkills((skillsRes.data || []).filter(g => g.items && g.items.length > 0));
       setBlogs(blogsRes.data || []);
       setProjects(projectsRes.data || []);
-      setProfile(profileRes.data || null);
+      const pData = profileRes.data?.profile || profileRes.data?.about || profileRes.data || null;
+      setProfile(pData);
     }).finally(() => setDataLoading(false));
   }, []);
 
   const STATS = profile ? [
-  { n: profile.stat2n||'3+', l: profile.stat2l||'Years Exp' },
-  { n: profile.stat2n||'2+', l: profile.stat2l||'Live Projects' },
-  { n: profile.stat3n||'20+', l: profile.stat3l||'Clients' },
-  { n: profile.stat4n||'15+', l: profile.stat4l||'Technologies' },
-] : DEFAULT_STATS;
+    { n: profile.stat1n || profile.stats?.stat1n || '2+',  l: profile.stat1l || profile.stats?.stat1l || 'Projects Live' },
+    { n: profile.stat2n || profile.stats?.stat2n || '3+',  l: profile.stat2l || profile.stats?.stat2l || 'Years Exp' },
+    { n: profile.stat3n || profile.stats?.stat3n || '20+', l: profile.stat3l || profile.stats?.stat3l || 'Clients' },
+    { n: profile.stat4n || profile.stats?.stat4n || '15+', l: profile.stat4l || profile.stats?.stat4l || 'Technologies' }
+  ] : DEFAULT_STATS;
 
   const go = (p) => { navigate(p); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
