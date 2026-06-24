@@ -75,10 +75,10 @@ export default function Home({ navigate }) {
   }, []);
 
   const STATS = profile ? [
-    { n: profile.stat1n || profile.stats?.stat1n || '2+',  l: profile.stat1l || profile.stats?.stat1l || 'Projects Live' },
-    { n: profile.stat2n || profile.stats?.stat2n || '3+',  l: profile.stat2l || profile.stats?.stat2l || 'Years Exp' },
-    { n: profile.stat3n || profile.stats?.stat3n || '20+', l: profile.stat3l || profile.stats?.stat3l || 'Clients' },
-    { n: profile.stat4n || profile.stats?.stat4n || '15+', l: profile.stat4l || profile.stats?.stat4l || 'Technologies' }
+    { n: profile.stat1 || profile.stat1n || '2+',  l: profile.stat1l || 'Projects Live' },
+    { n: profile.stat2 || profile.stat2n || '3+',  l: profile.stat2l || 'Years Exp' },
+    { n: profile.stat3 || profile.stat3n || '20+', l: profile.stat3l || 'Clients' },
+    { n: profile.stat4 || profile.stat4n || '15+', l: profile.stat4l || 'Technologies' }
   ] : DEFAULT_STATS;
 
   const go = (p) => { navigate(p); window.scrollTo({ top: 0, behavior: 'smooth' }); };
