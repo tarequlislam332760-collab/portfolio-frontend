@@ -133,12 +133,15 @@ export default function About() {
 
             {/* Buttons */}
             <div style={{ display:"flex", gap:"0.8rem", flexWrap:"wrap", alignItems:"center" }}>
-              <button onClick={() => nav("/contact")}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
+          <button onClick={() => nav("/contact")}
                 style={{ background:"linear-gradient(135deg,#00D4AA,#38BDF8)", color:"#050A14", border:"none", borderRadius:10, padding:"13px 26px", fontWeight:700, fontSize:"0.9rem", cursor:"pointer", fontFamily:"var(--font-body)", transition:"transform 0.2s,box-shadow 0.2s" }}
                 onMouseEnter={e=>{ e.currentTarget.style.transform="scale(1.04)"; e.currentTarget.style.boxShadow="0 0 22px rgba(0,212,170,0.38)"; }}
                 onMouseLeave={e=>{ e.currentTarget.style.transform="scale(1)"; e.currentTarget.style.boxShadow="none"; }}>
                 Let's Talk 👋
               </button>
+          <SocialLinks size={40} />
+        </div>
               
             </div>
           </div>
