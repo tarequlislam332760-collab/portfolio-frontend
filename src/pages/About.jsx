@@ -76,13 +76,7 @@ export default function About() {
                 )}
                 <div className="fallback-t" style={{ display:"none", width:"100%", height:"100%", alignItems:"center", justifyContent:"center", fontSize:"5rem", fontFamily:"var(--font-head)", fontWeight:900, background:"linear-gradient(135deg,#00D4AA,#818CF8)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", position:"absolute", inset:0 }}>T</div>
                 <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top,rgba(5,10,20,0.7),transparent 50%)" }} />
-                {/* Social icons overlay */}
-                <div style={{ position:"absolute", bottom:14, left:12, right:12, display:"flex", gap:7, justifyContent:"center" }}>
-                  <SocialLink type="facebook" size={34} url={profile.facebookUrl || profile.facebook || "#"} />
-                  <SocialLink type="instagram" size={34} url={profile.instagramUrl || profile.instagram || "#"} />
-                  <SocialLink type="linkedin" size={34} url={profile.linkedinUrl || profile.linkedin || "#"} />
-                  <SocialLink type="github" size={34} url={profile.githubUrl || profile.github || "#"} />
-                </div>
+                
               </div>
               {/* Badge */}
               <div style={{ position:"absolute", bottom:-18, right:-18, background:"#0d1829", border:"2px solid #00D4AA", borderRadius:14, padding:"12px 16px", textAlign:"center", boxShadow:"0 8px 30px rgba(0,0,0,0.4)", zIndex:2 }}>
