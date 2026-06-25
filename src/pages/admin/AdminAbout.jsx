@@ -21,7 +21,6 @@ const DEF = {
   image:"",
   infoRole:"MERN Developer",
   infoWork:"Remote Worldwide",
-  facebook:"", linkedin:"", github:"", instagram:"",
   stat1n:"2+", stat1l:"Projects Live",
   stat2n:"3+", stat2l:"Years Exp",
   stat3n:"20+", stat3l:"Clients",
@@ -224,31 +223,6 @@ export default function AdminAbout() {
               </div>
             )}
           </div>
-
-          
-            {/* 🌐 Social Links Section */}
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "1.2rem", marginTop: "1.2rem" }}>
-              <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:"1.2rem" }}>
-                <span style={{ fontSize:"1.1rem" }}>🌐</span>
-                <h3 style={{ color:"#00D4AA", fontFamily:"var(--font-head)", fontWeight:700, fontSize:"0.95rem", margin:0 }}>Social Media Links</h3>
-              </div>
-              <div className="about-grid">
-                {[
-                  { name:"facebook",  label:"📘 Facebook Link",  placeholder:"https://facebook.com/username" },
-                  { name:"linkedin",  label:"💼 LinkedIn Link",  placeholder:"https://linkedin.com/in/username" },
-                  { name:"github",    label:"💻 GitHub Link",    placeholder:"https://github.com/username" },
-                  { name:"instagram", label:"📸 Instagram Link", placeholder:"https://instagram.com/username" }
-                ].map(s => (
-                  <div key={s.name}>
-                    <label style={LBL}>{s.label}</label>
-                    <input name={s.name} value={data[s.name]||""} onChange={inp}
-                      placeholder={s.placeholder} className="inp-focus" style={INP}
-                      onFocus={e=>e.target.style.borderColor="#00D4AA"}
-                      onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.09)"} />
-                  </div>
-                ))}
-              </div>
-            </div>
 
           {/* Available toggle */}
           <div style={{ ...CARD, display:"flex", alignItems:"center", justifyContent:"space-between", gap:16, flexWrap:"wrap" }}>

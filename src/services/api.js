@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const BASE_URL = "https://portfolio-backend-bjtg.onrender.com/api";
 
 const getToken = () => sessionStorage.getItem("admin_token");
 
@@ -65,3 +65,10 @@ export const analyticsAPI = {
 };
 
 export default api;
+
+export const uploadAPI = {
+  uploadImage: (base64Image) => api("/upload", {
+    method: "POST",
+    body: JSON.stringify({ image: base64Image }),
+  }),
+};

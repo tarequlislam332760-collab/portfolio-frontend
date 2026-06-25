@@ -1,3 +1,30 @@
+// Run in CLIENT folder: node fix_frontend_upload.cjs
+const fs = require('fs');
+
+// ══════════════════════════════════════════
+// 1. api.js — add uploadAPI
+// ══════════════════════════════════════════
+let api = fs.readFileSync('src/services/api.js', 'utf8');
+
+if (!api.includes('uploadAPI')) {
+  api += `
+export const uploadAPI = {
+  uploadImage: (base64Image) => api("/upload", {
+    method: "POST",
+    body: JSON.stringify({ image: base64Image }),
+  }),
+};
+`;
+  fs.writeFileSync('src/services/api.js', api, 'utf8');
+  console.log('✅ api.js — uploadAPI added');
+} else {
+  console.log('ℹ️  api.js — uploadAPI already exists');
+}
+
+// ══════════════════════════════════════════
+// 2. AdminProfile.jsx — use Cloudinary upload
+// ══════════════════════════════════════════
+fs.writeFileSync('src/pages/admin/AdminProfile.jsx', `
 import React, { useEffect, useState, useRef } from "react";
 import { profileAPI, uploadAPI } from "../../services/api";
 
@@ -252,3 +279,19 @@ export default function AdminProfile() {
     </div>
   );
 }
+`.trimStart());
+console.log('✅ AdminProfile.jsx — Cloudinary upload connected');
+
+console.log(`
+╔══════════════════════════════════════════════════════╗
+║  ✅ Frontend fix সম্পূর্ণ!                           ║
+╠══════════════════════════════════════════════════════╣
+║                                                      ║
+║  ✅ Photo upload → Cloudinary → URL save হবে        ║
+║  ✅ Stats tab → save করলে website update হবে        ║
+║  ✅ Social links tab → all platforms                 ║
+║  ✅ Bio tab → with live preview                     ║
+║                                                      ║
+║  npm run dev চালান                                   ║
+╚══════════════════════════════════════════════════════╝
+`);
