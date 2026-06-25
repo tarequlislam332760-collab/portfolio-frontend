@@ -139,7 +139,7 @@ export default function About() {
                 onMouseLeave={e=>{ e.currentTarget.style.transform="scale(1)"; e.currentTarget.style.boxShadow="none"; }}>
                 Let's Talk 👋
               </button>
-              <SocialLinks size={42} />
+              
             </div>
           </div>
         </div>
