@@ -150,10 +150,15 @@ export default function Home({ navigate }) {
 
             <motion.div className="home-hero-stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
               style={{ display: 'flex', gap: 'clamp(18px,3vw,36px)', marginTop: '38px', flexWrap: 'wrap' }}>
-              {STATS.map((s, i) => (
+              {[
+                  [profile?.stat1n||'2+', profile?.stat1l||'Projects Live'],
+                  [profile?.stat2n||'3+', profile?.stat2l||'Years Exp'],
+                  [profile?.stat3n||'20+', profile?.stat3l||'Clients'],
+                  [profile?.stat4n||'15+', profile?.stat4l||'Technologies'],
+                ].map(([n,l], i) => (
                 <div key={i}>
-                  <div style={{ fontSize: 'clamp(20px,3vw,30px)', fontWeight: 900, color: '#fff', fontFamily: '"Syne",sans-serif', letterSpacing: '-0.5px' }}>{s.n}</div>
-                  <div style={{ color: 'rgba(255,255,255,0.28)', fontSize: '11px', marginTop: '2px', letterSpacing: '0.5px', fontFamily: '"DM Sans",sans-serif', textTransform: 'uppercase' }}>{s.l}</div>
+                  <div style={{ fontSize: 'clamp(20px,3vw,30px)', fontWeight: 900, color: '#fff', fontFamily: '"Syne",sans-serif', letterSpacing: '-0.5px' }}>{n}</div>
+                  <div style={{ color: 'rgba(255,255,255,0.28)', fontSize: '11px', marginTop: '2px', letterSpacing: '0.5px', fontFamily: '"DM Sans",sans-serif', textTransform: 'uppercase' }}>{l}</div>
                 </div>
               ))}
             </motion.div>
@@ -213,11 +218,16 @@ export default function Home({ navigate }) {
                 {profile?.bio2 || "Deployed 2+ full-stack projects on Vercel — combining technical depth with strategic digital marketing to grow businesses online."}
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '24px' }}>
-                {STATS.map((s, i) => (
+                {[
+                  [profile?.stat1n||'2+', profile?.stat1l||'Projects Live'],
+                  [profile?.stat2n||'3+', profile?.stat2l||'Years Exp'],
+                  [profile?.stat3n||'20+', profile?.stat3l||'Clients'],
+                  [profile?.stat4n||'15+', profile?.stat4l||'Technologies'],
+                ].map(([n,l], i) => (
                   <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 + 0.2 }} whileHover={{ y: -4, borderColor: 'rgba(0,212,170,0.25)' }}
                     style={{ background: 'rgba(0,212,170,0.04)', border: '1px solid rgba(0,212,170,0.1)', borderRadius: '12px', padding: '14px', transition: 'all 0.3s' }}>
-                    <div style={{ fontSize: 'clamp(20px,3vw,26px)', fontWeight: 900, color: '#fff', fontFamily: '"Syne",sans-serif' }}>{s.n}</div>
-                    <div style={{ color: 'rgba(255,255,255,0.33)', fontSize: '11px', fontFamily: '"DM Sans",sans-serif', marginTop: '2px' }}>{s.l}</div>
+                    <div style={{ fontSize: 'clamp(20px,3vw,26px)', fontWeight: 900, color: '#fff', fontFamily: '"Syne",sans-serif' }}>{n}</div>
+                    <div style={{ color: 'rgba(255,255,255,0.33)', fontSize: '11px', fontFamily: '"DM Sans",sans-serif', marginTop: '2px' }}>{l}</div>
                   </motion.div>
                 ))}
               </div>
