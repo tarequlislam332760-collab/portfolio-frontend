@@ -31,6 +31,8 @@ export default function AdminDashboard() {
     if (stats.messages?.unread !== undefined && key === "unreadMessages") return stats.messages.unread;
     if (stats.testimonials !== undefined && key === "totalTestimonials") return stats.testimonials;
     if (stats.skills !== undefined && key === "totalSkills") return stats.skills;
+    if (stats.totalServices !== undefined && key === "totalServices") return stats.totalServices;
+    if (stats.services !== undefined && key === "totalServices") return stats.services;
     return fallback;
   };
 
@@ -39,6 +41,7 @@ export default function AdminDashboard() {
     { icon: "✍️", title: "Blog Posts",    value: loading ? "..." : String(get("totalBlogs")),    change: 20,  color: "#38BDF8" },
     { icon: "✉️", title: "Messages",      value: loading ? "..." : String(get("totalMessages")), change: get("unreadMessages"), color: "#818CF8" },
     { icon: "⭐", title: "Reviews",       value: loading ? "..." : String(get("totalTestimonials")), change: 0, color: "#f472b6" },
+    { icon: "⚙️", title: "Services",  value: loading ? "..." : String(get("totalServices")), change: 0, color: "#818CF8" },
     { icon: "⚡", title: "Skills",        value: loading ? "..." : String(get("totalSkills")), change: 0, color: "#f59e0b" },
   ];
 

@@ -1,3 +1,19 @@
+import fs from "fs";
+import path from "path";
+
+const base = process.cwd();
+const src  = path.join(base, "src");
+
+function write(p, c) {
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, c.trimStart(), "utf8");
+  console.log("✅", p.replace(base + "/", ""));
+}
+
+// ══════════════════════════════════════════
+// 1. AdminServices.jsx — no scroll, responsive
+// ══════════════════════════════════════════
+write(path.join(src, "pages/admin/AdminServices.jsx"), `
 import React, { useEffect, useState } from "react";
 import { servicesAPI } from "../../services/api";
 
@@ -85,7 +101,7 @@ export default function AdminServices() {
 
   return (
     <div style={{ animation:"fadeUp 0.5s ease both" }}>
-      <style>{`
+      <style>{\`
         @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
         @keyframes spin   { to{transform:rotate(360deg)} }
         .svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem; }
@@ -94,14 +110,14 @@ export default function AdminServices() {
           .form-row2{ grid-template-columns:1fr; }
           .svc-grid { grid-template-columns:1fr; }
         }
-      `}</style>
+      \`}</style>
 
       {/* Header */}
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"clamp(1rem,3vw,1.8rem)", flexWrap:"wrap", gap:12 }}>
         <div>
           <h2 style={{ fontFamily:"var(--font-head)", fontWeight:800, fontSize:"clamp(1.2rem,4vw,1.5rem)", color:"#fff", marginBottom:"0.2rem" }}>Services</h2>
           <p style={{ color:"var(--muted)", fontSize:"0.82rem", fontFamily:"var(--font-body)" }}>
-            {loading ? "Loading..." : `${services.filter(s=>s.active).length} Active · ${services.filter(s=>!s.active).length} Hidden`}
+            {loading ? "Loading..." : \`\${services.filter(s=>s.active).length} Active · \${services.filter(s=>!s.active).length} Hidden\`}
           </p>
         </div>
         <button onClick={openAdd} style={{ background:"linear-gradient(135deg,#818CF8,#f472b6)", border:"none", color:"#fff", borderRadius:10, padding:"10px 20px", fontWeight:800, fontSize:"0.85rem", cursor:"pointer", fontFamily:"var(--font-body)", whiteSpace:"nowrap" }}>
@@ -129,13 +145,13 @@ export default function AdminServices() {
       ) : (
         <div className="svc-grid">
           {services.map(s => (
-            <div key={s._id} style={{ background:"rgba(255,255,255,0.02)", border:`1px solid ${s.active?"rgba(129,140,248,0.15)":"rgba(255,255,255,0.06)"}`, borderRadius:16, padding:"clamp(14px,2.5vw,20px)", opacity:s.active?1:0.6, transition:"all 0.2s", display:"flex", flexDirection:"column", gap:10 }}>
+            <div key={s._id} style={{ background:"rgba(255,255,255,0.02)", border:\`1px solid \${s.active?"rgba(129,140,248,0.15)":"rgba(255,255,255,0.06)"}\`, borderRadius:16, padding:"clamp(14px,2.5vw,20px)", opacity:s.active?1:0.6, transition:"all 0.2s", display:"flex", flexDirection:"column", gap:10 }}>
               <div style={{ display:"flex", alignItems:"flex-start", gap:12 }}>
-                <div style={{ width:46,height:46,borderRadius:12,background:`${s.color}18`,border:`1px solid ${s.color}33`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.4rem",flexShrink:0 }}>{s.icon}</div>
+                <div style={{ width:46,height:46,borderRadius:12,background:\`\${s.color}18\`,border:\`1px solid \${s.color}33\`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.4rem",flexShrink:0 }}>{s.icon}</div>
                 <div style={{ flex:1, minWidth:0 }}>
                   <div style={{ display:"flex", alignItems:"center", gap:6, flexWrap:"wrap", marginBottom:3 }}>
                     <span style={{ background:s.active?"rgba(0,212,170,0.1)":"rgba(255,255,255,0.06)", color:s.active?"#00D4AA":"rgba(255,255,255,0.3)", padding:"1px 7px", borderRadius:99, fontSize:"0.68rem", fontWeight:700, fontFamily:"var(--font-body)" }}>{s.active?"● Active":"○ Hidden"}</span>
-                    {s.tag && <span style={{ background:`${s.color}15`,color:s.color,padding:"1px 7px",borderRadius:99,fontSize:"0.68rem",fontWeight:700,fontFamily:"var(--font-body)" }}>{s.tag}</span>}
+                    {s.tag && <span style={{ background:\`\${s.color}15\`,color:s.color,padding:"1px 7px",borderRadius:99,fontSize:"0.68rem",fontWeight:700,fontFamily:"var(--font-body)" }}>{s.tag}</span>}
                   </div>
                   <h4 style={{ fontFamily:"var(--font-head)", fontWeight:700, fontSize:"0.9rem", color:"#fff", margin:0 }}>{s.title}</h4>
                 </div>
@@ -246,3 +262,53 @@ export default function AdminServices() {
     </div>
   );
 }
+`);
+
+// ══════════════════════════════════════════
+// 2. AdminDashboard.jsx — add Services card
+// ══════════════════════════════════════════
+const dashPath = path.join(src, "pages/admin/AdminDashboard.jsx");
+if (fs.existsSync(dashPath)) {
+  let f = fs.readFileSync(dashPath, "utf8");
+
+  // Fix get() to handle totalServices
+  if (!f.includes("totalServices")) {
+    f = f.replace(
+      "if (stats.skills !== undefined && key === \"totalSkills\") return stats.skills;",
+      `if (stats.skills !== undefined && key === "totalSkills") return stats.skills;
+    if (stats.totalServices !== undefined && key === "totalServices") return stats.totalServices;
+    if (stats.services !== undefined && key === "totalServices") return stats.services;`
+    );
+
+    // Add Services card
+    f = f.replace(
+      `{ icon: "⚡", title: "Skills",`,
+      `{ icon: "⚙️", title: "Services",  value: loading ? "..." : String(get("totalServices")), change: 0, color: "#818CF8" },
+    { icon: "⚡", title: "Skills",`
+    );
+
+    fs.writeFileSync(dashPath, f, "utf8");
+    console.log("✅ src/pages/admin/AdminDashboard.jsx — Services card added!");
+  } else {
+    console.log("ℹ️  AdminDashboard already has Services card");
+  }
+}
+
+console.log(`
+╔══════════════════════════════════════════════════════════╗
+║          ✅ সব fix হয়েছে!                               ║
+╠══════════════════════════════════════════════════════════╣
+║                                                          ║
+║  এখন করুন:                                              ║
+║    git add src/pages/admin/AdminServices.jsx             ║
+║    git add src/pages/admin/AdminDashboard.jsx            ║
+║    git commit -m "Fix services form and dashboard card"  ║
+║    git push                                              ║
+║                                                          ║
+║  Backend এও push করুন (analyticsController fix):       ║
+║    cd /c/portfolio-ecosystem/backend                     ║
+║    git add .                                             ║
+║    git commit -m "Add totalServices to analytics"        ║
+║    git push                                              ║
+╚══════════════════════════════════════════════════════════╝
+`);
