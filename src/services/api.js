@@ -72,3 +72,10 @@ export const uploadAPI = {
     body: JSON.stringify({ image: base64Image }),
   }),
 };
+
+export const servicesAPI = {
+  getAll:    ()         => api("/services"),
+  create:    (data)     => api("/services",       { method: "POST",   body: JSON.stringify(data) }),
+  update:    (id, data) => api(`/services/${id}`, { method: "PUT",    body: JSON.stringify(data) }),
+  delete:    (id)       => api(`/services/${id}`, { method: "DELETE" }),
+};

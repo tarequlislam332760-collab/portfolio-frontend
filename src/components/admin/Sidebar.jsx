@@ -5,6 +5,7 @@ const LINKS = [
   { icon: "📊", label: "Dashboard",    path: "/admin" },
   { icon: "🚀", label: "Projects",     path: "/admin/projects" },
   { icon: "⚡", label: "Skills",       path: "/admin/skills" },
+  { icon: "⚙️", label: "Services", path: "/admin/services" },
   { icon: "✍️", label: "Blog",         path: "/admin/blog" },
   { icon: "⭐", label: "Reviews",      path: "/admin/testimonials" },
   { icon: "✉️", label: "Messages",     path: "/admin/messages" },

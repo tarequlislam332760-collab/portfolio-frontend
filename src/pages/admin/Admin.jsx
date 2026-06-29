@@ -10,6 +10,7 @@ import AdminBlog from "./AdminBlog";
 import AdminTestimonials from "./AdminTestimonials";
 import AdminMessages from "./AdminMessages";
 import AdminProfile from "./AdminProfile";
+import AdminServices from "./AdminServices";
 
 export default function Admin() {
   const [collapsed, setCollapsed] = useState(false);
@@ -38,6 +39,7 @@ export default function Admin() {
           <Route path="messages"     element={<AdminMessages />} />
           <Route path="about" element={<AdminAbout />} />
               <Route path="profile"      element={<AdminProfile />} />
+          <Route path="services"     element={<AdminServices />} />
         </Routes>
       </div>
       <style>{`
